@@ -17,7 +17,7 @@ jobs:
           python-version: '3.11'
 
       - name: Kutuphaneleri Yukle
-        run: pip install edge-tts
+        run: pip install requests edge-tts
 
       - name: Botu Calistir
         run: python bot.py
