@@ -1,8 +1,6 @@
 name: Gezeryolu Haber Guncelle
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 * * * *'
 
 jobs:
   build:
@@ -10,15 +8,20 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Kodlari Cek
+        uses: actions/checkout@v4
+
       - name: Python Kur
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - name: Kutuphaneleri Yukle
-        run: pip install requests edge-tts
+        run: pip install edge-tts
+
       - name: Botu Calistir
         run: python bot.py
+
       - name: MP3u Kaydet
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
