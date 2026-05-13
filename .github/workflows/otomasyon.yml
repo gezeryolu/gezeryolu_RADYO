@@ -1,24 +1,26 @@
 name: Gezeryolu Haber Guncelle
 on:
   schedule:
-    - cron: '0 * * * *' # Her saat başı otomatik çalışır
-  workflow_dispatch: # Manuel çalıştırma butonu ekler
+    - cron: '0 * * * *' # Her saat başı
+  workflow_dispatch: # El ile çalıştırma butonu
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions: # İzinleri doğrudan kodun içine de yazıyoruz ki garanti olsun
+      contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # v3'ü v4 yaptık (Güncel versiyon)
       - name: Python Kur
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # v4'ü v5 yaptık (Güncel versiyon)
         with:
-          python-version: '3.9'
+          python-version: '3.11' # Daha modern bir Python sürümü
       - name: Kutuphaneleri Yukle
         run: pip install requests edge-tts
       - name: Botu Calistir
         run: python bot.py
       - name: MP3u Kaydet
-        uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v5 # v4'ü v5 yaptık
         with:
           commit_message: "Haber bulteni guncellendi"
           file_pattern: "haberler.mp3"
