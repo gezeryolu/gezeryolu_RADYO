@@ -17,10 +17,14 @@ jobs:
           python-version: '3.11'
 
       - name: Kutuphaneleri Yukle
-        run: pip install requests edge-tts
+        run: pip install edge-tts requests
 
-      - name: Botu Calistir
-        run: python bot.py
+      - name: Botu Calistir (Sert Yontem)
+        run: |
+          # Bulundugun yerdeki her seyi listele (Hata ayiklamak icin)
+          ls -R
+          # bot.py dosyasini nerede olursa olsun bul ve calistir
+          find . -name "bot.py" -exec python3 {} \;
 
       - name: MP3u Kaydet
         uses: stefanzweifel/git-auto-commit-action@v5
