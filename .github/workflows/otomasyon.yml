@@ -1,0 +1,28 @@
+name: Gezeryolu Haber Guncelle
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Python Kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Kutuphaneleri Yukle
+        run: pip install requests edge-tts
+      - name: Botu Calistir
+        run: |
+          FILE_PATH=$(find . -name "bot.py" -print -quit)
+          python "$FILE_PATH"
+      - name: MP3u Kaydet
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Haber bulteni guncellendi"
+          file_pattern: "haberler.mp3"
