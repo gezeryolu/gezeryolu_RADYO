@@ -19,11 +19,9 @@ jobs:
       - name: Kutuphaneleri Yukle
         run: pip install edge-tts requests
 
-      - name: Botu Calistir (Sert Yontem)
+      - name: Botu Calistir
         run: |
-          # Bulundugun yerdeki her seyi listele (Hata ayiklamak icin)
           ls -R
-          # bot.py dosyasini nerede olursa olsun bul ve calistir
           find . -name "bot.py" -exec python3 {} \;
 
       - name: MP3u Kaydet
