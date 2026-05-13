@@ -1,6 +1,8 @@
 name: Gezeryolu Haber Guncelle
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
 
 jobs:
   build:
@@ -16,9 +18,7 @@ jobs:
       - name: Kutuphaneleri Yukle
         run: pip install requests edge-tts
       - name: Botu Calistir
-        run: |
-          # Dosyayı bulana kadar her yere bak
-          python gezeryolu_RADYO/bot.py || python bot.py || python ./bot.py || find . -name "bot.py" -exec python {} \;
+        run: python bot.py
       - name: MP3u Kaydet
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
