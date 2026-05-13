@@ -1,0 +1,24 @@
+name: Gezeryolu Haber Guncelle
+on:
+  schedule:
+    - cron: '0 * * * *' # Her saat başı otomatik çalışır
+  workflow_dispatch: # Manuel çalıştırma butonu ekler
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Python Kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Kutuphaneleri Yukle
+        run: pip install requests edge-tts
+      - name: Botu Calistir
+        run: python bot.py
+      - name: MP3u Kaydet
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Haber bulteni guncellendi"
+          file_pattern: "haberler.mp3"
